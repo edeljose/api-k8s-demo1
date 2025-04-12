@@ -3,7 +3,7 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 app.get('/ping', (req, res) => {
-  res.json({ message: 'pong' });
+  res.json({ message: 'pong fail' });
 });
 
 app.listen(port, () => {
