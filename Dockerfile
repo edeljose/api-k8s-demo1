@@ -11,6 +11,8 @@ WORKDIR /app
 # Actualizar npm a la última versión
 RUN npm install -g npm@latest
 
+RUN npm install prom-client
+
 COPY package*.json ./
 
 RUN npm install
