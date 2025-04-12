@@ -1,16 +1,16 @@
-const express = require('express');
-const app = express();
-const port = process.env.PORT || 3000;
+const express = require("express")
+const app = express()
+const port = process.env.PORT || 3000
 
-app.get('/ping', (req, res) => {
-  res.json({ message: 'pong1'   }); // o cualquier cosa que quieras probar
-});
+app.get("/ping", (req, res) => {
+  res.json({ message: "pong1"   })
+})
 
 if (require.main === module) {
   app.listen(port, () => {
-    console.log(`API corriendo en http://localhost:${port}`);
-  });
+    console.log("API corriendo en http://localhost:" + port)
+  })
 }
 
-module.exports = app; // <-- exportas la app para usarla en tests
+module.exports = app
 
