@@ -3,7 +3,7 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 app.get('/ping', (req, res) => {
-  res.json({ message: 'pong'   }); // o cualquier cosa que quieras probar
+  res.json({ message: 'pong1'   }); // o cualquier cosa que quieras probar
 });
 
 if (require.main === module) {
