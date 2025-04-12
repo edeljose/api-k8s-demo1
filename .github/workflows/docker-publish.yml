@@ -52,11 +52,6 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Install dependencies and update
-        run: |
-          npm install -g npm@latest  # Asegura que npm esté actualizado
-          npm update                 # Actualiza las dependencias a sus últimas versiones compatibles
-
       - name: Build image
         run: docker build -t edeljose/api-k8s-demo1:latest .
 
