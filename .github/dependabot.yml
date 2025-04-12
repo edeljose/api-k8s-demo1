@@ -1,0 +1,10 @@
+version: 2
+updates:
+  - package-ecosystem: "npm"
+    directory: "/"  # Dirección donde está tu `package.json`
+    schedule:
+      interval: "weekly"  # Puede ser daily, weekly, monthly
+    ignore:
+      - dependency-name: "cross-spawn"
+        versions: ["7.x.x"]  # Ignorar actualizaciones para una versión específica (opcional)
+
