@@ -1,10 +1,5 @@
 const request = require('supertest');
-const express = require('express');
-const app = express();
-
-app.get('/ping', (req, res) => {
-  res.json({ message: 'pong' });
-});
+const app = require('../index'); // <-- importa la app real
 
 describe('GET /ping', () => {
   it('responde con pong', async () => {
