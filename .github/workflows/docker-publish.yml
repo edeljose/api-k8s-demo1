@@ -1,4 +1,4 @@
-  name: Build, Lint, Scan, Push and Deploy
+name: Build, Lint, Scan, Push and Deploy
 
 on:
   push:
@@ -58,7 +58,7 @@ jobs:
       - name: Scan Docker image with Trivy
         uses: aquasecurity/trivy-action@master
         with:
-          image-ref: edeljose/api-k8s-demo:latest
+          image-ref: edeljose/api-k8s-demo1:latest
           exit-code: '1'
           severity: 'CRITICAL,HIGH'
 
