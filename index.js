@@ -1,5 +1,5 @@
 // index.js
-require('./tracing'); // <-- importante que sea lo primero
+require('./tracing'); // <- esto primero, no rompe tests si respetas NODE_ENV
 
 const express = require('express');
 const client = require('prom-client');
@@ -7,26 +7,33 @@ const client = require('prom-client');
 const app = express();
 const port = process.env.PORT || 3000;
 
+// 🟢 Inicializar métricas por defecto
 client.collectDefaultMetrics();
 
+// 🔵 Crear el contador personalizado
 const counter = new client.Counter({
   name: 'http_requests_total',
   help: 'Número total de solicitudes HTTP a /ping',
 });
 
+// 🟡 Endpoint de prueba
 app.get('/ping', (req, res) => {
-  counter.inc();
-  res.json({ message: 'pong' });
+  counter.inc(); // Incrementar el contador
+  res.json({ message: 'pong1' });
 });
 
+// 🔵 Endpoint de métricas
 app.get('/metrics', async (req, res) => {
   res.set('Content-Type', client.register.contentType);
   res.end(await client.register.metrics());
 });
 
-app.listen(port, () => {
-  console.log(`API corriendo en http://localhost:${port}`);
-});
+// ✅ SOLO iniciar el servidor si es ejecutado directamente
+if (require.main === module) {
+  app.listen(port, () => {
+    console.log(`API corriendo en http://localhost:${port}`);
+  });
+}
 
 module.exports = app;
 
