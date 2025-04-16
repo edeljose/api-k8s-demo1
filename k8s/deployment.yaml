@@ -23,15 +23,4 @@ spec:
           image: edeljose/api-k8s-demo1:latest
           ports:
             - containerPort: 3000
-          env:
-            - name: JAEGER_AGENT_HOST
-              value: "jaeger-agent.demo-api.svc.cluster.local"  # URL del agente Jaeger
-            - name: JAEGER_AGENT_PORT
-              value: "5775"  # Puerto del agente Jaeger
-            - name: JAEGER_SAMPLER_TYPE
-              value: "const"  # Establecer el tipo de muestreo (constante)
-            - name: JAEGER_SAMPLER_PARAM
-              value: "1"  # Configurar muestreo al 100%
-            - name: JAEGER_SERVICE_NAME
-              value: "api-demo"  # Nombre del servicio para las trazas
 
