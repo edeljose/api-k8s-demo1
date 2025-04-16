@@ -2,22 +2,15 @@
 'use strict';
 
 const { NodeSDK } = require('@opentelemetry/sdk-node');
-const { OTLPTraceExporter } = require('@opentelemetry/exporter-trace-otlp-grpc');
 const { getNodeAutoInstrumentations } = require('@opentelemetry/auto-instrumentations-node');
+const { JaegerExporter } = require('@opentelemetry/exporter-jaeger');
 
 const sdk = new NodeSDK({
-  traceExporter: new OTLPTraceExporter({
-    // Dirección del collector de Jaeger en Kubernetes
-    url: 'http://jaeger-collector.observability.svc:4317',
+  traceExporter: new JaegerExporter({
+    endpoint: 'http://jaeger-collector.observability.svc.cluster.local:14268/api/traces',
   }),
   instrumentations: [getNodeAutoInstrumentations()],
 });
 
-sdk.start()
-  .then(() => {
-    console.log('OpenTelemetry initialized');
-  })
-  .catch((error) => {
-    console.log('Error initializing OpenTelemetry', error);
-  });
+sdk.start();
 
