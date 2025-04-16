@@ -1,26 +1,33 @@
+require('./tracing'); // 🔴 Importar antes que todo
+
 const express = require('express');
+const client = require('prom-client');
+
 const app = express();
 const port = process.env.PORT || 3000;
 
-app.get('/ping', (req, res) => {
-  res.json({ message: 'pong1' }); // pong1 es intencional para que falle el test
+client.collectDefaultMetrics();
+
+const counter = new client.Counter({
+  name: 'http_requests_total',
+  help: 'Número total de solicitudes HTTP a /ping'
 });
 
-if (require.main === module) {
-  app.listen(port, () => {
-    console.log(`API corriendo en http://localhost:${port}`);
-  });
-}
-
-const client = require('prom-client');
-const collectDefaultMetrics = client.collectDefaultMetrics;
-collectDefaultMetrics();
+app.get('/ping', (req, res) => {
+  counter.inc();
+  res.json({ message: 'pong1' });
+});
 
 app.get('/metrics', async (req, res) => {
   res.set('Content-Type', client.register.contentType);
   res.end(await client.register.metrics());
 });
 
+if (require.main === module) {
+  app.listen(port, () => {
+    console.log(`API corriendo  en http://localhost:${port}`);
+  });
+}
 
 module.exports = app;
 

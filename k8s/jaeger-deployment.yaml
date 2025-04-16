@@ -1,0 +1,15 @@
+apiVersion: jaegertracing.io/v1
+kind: Jaeger
+metadata:
+  name: simple-jaeger
+  namespace: demo-api
+spec:
+  strategy: allInOne
+  allInOne:
+    options:
+      log-level: debug
+  agent:
+    ports:
+      - name: default
+        containerPort: 5775
+

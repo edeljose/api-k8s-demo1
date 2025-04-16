@@ -1,0 +1,11 @@
+# jaeger-instance.yaml
+apiVersion: jaegertracing.io/v1
+kind: Jaeger
+metadata:
+  name: jaeger
+  namespace: observability
+spec:
+  strategy: allInOne
+  ingress:
+    enabled: false
+
