@@ -16,7 +16,7 @@ const counter = new client.Counter({
 // 🟡 Endpoint de prueba
 app.get('/ping', (req, res) => {
   counter.inc(); // Incrementar el contador
-  res.json({ message: 'pong' });
+  res.json({ message: 'pong1' });
 });
 
 // 🔵 Endpoint de métricas
